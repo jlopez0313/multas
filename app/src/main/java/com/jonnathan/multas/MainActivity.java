@@ -65,11 +65,11 @@ public class MainActivity extends AppCompatActivity
     android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
 
     if (id == R.id.nav_personas) {
-      fragmentManager.beginTransaction().replace(R.id.content_main, new PersonasFormFragment()).commit();
+      fragmentManager.beginTransaction().replace(R.id.content_main, new PersonasFragment()).commit();
     } else if (id == R.id.nav_vehiculos) {
-      fragmentManager.beginTransaction().replace(R.id.content_main, new VehiculosFormFragment()).commit();
+      fragmentManager.beginTransaction().replace(R.id.content_main, new VehiculosFragment()).commit();
     } else if (id == R.id.nav_multas) {
-      fragmentManager.beginTransaction().replace(R.id.content_main, new MultasFormFragment()).commit();
+      fragmentManager.beginTransaction().replace(R.id.content_main, new MultasFragment()).commit();
     }
 
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -2,31 +2,34 @@ package com.jonnathan.multas.Clases;
 
 import java.util.List;
 import retrofit2.Call;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface VehiculosInterface
 {
-  @POST("vehiculos")
+  @GET("vehiculos")
   Call<List<Vehiculos>> getVehiculos();
 
-  @POST("vehiculos/{id}")
-  Call<Vehiculos> getVehiculo(@Path("id") int id);
+  @POST("vehiculos/show/{id}")
+  Call<Vehiculos> show(@Path("id") int id);
 
-  @POST("vehiculos/store")
+  @PUT("vehiculos/store")
   @FormUrlEncoded
   Call<Vehiculos> store(@Field("placa") String placa);
 
-  @POST("vehiculos/update")
+  @PATCH("vehiculos/update")
   @FormUrlEncoded
   Call<Vehiculos> update(@Field("id") int id,
                          @Field("placa") String placa
   );
 
-  @POST("vehiculos/destroy")
-  @FormUrlEncoded
-  Call<Vehiculos> destroy(@Field("id") int id);
+  @DELETE("vehiculos/destroy/{id}")
+  Call<Vehiculos> destroy(@Path("id") int id);
 
 }

@@ -113,7 +113,8 @@ public class PersonasFormFragment extends Fragment {
       @Override
       public void onFailure(Call<Personas> call, Throwable t) {
         rootView.findViewById(R.id.loader).setVisibility(View.GONE);
-        Toast.makeText(getActivity(), "Error: " + t.getMessage().toString(), Toast.LENGTH_LONG).show();
+        System.out.println("Error Interno: " + t.getMessage().toString());
+        Toast.makeText(getActivity(), "Error Interno: " + t.toString(), Toast.LENGTH_LONG).show();
       }
     });
   }

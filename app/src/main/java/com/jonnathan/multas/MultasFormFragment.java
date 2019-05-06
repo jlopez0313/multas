@@ -88,14 +88,22 @@ public class MultasFormFragment extends Fragment {
           if(!documento.getText().toString().equals(""))
           {
             PersonasInterface servicio = new Servicios().Servicios().create(PersonasInterface.class);
-            final Call<Personas> persona = servicio.getPersona(Integer.parseInt(documento.getText().toString()));
+            final Call<Personas> persona = servicio.porDocumento(Integer.parseInt(documento.getText().toString()));
 
             persona.enqueue(new Callback<Personas>() {
               @Override
               public void onResponse(Call<Personas> call, Response<Personas> response) {
                 layoutPersonas.setVisibility(View.VISIBLE);
-                nombres.setText(response.body().getNombres());
-                apellidos.setText(response.body().getApellidos());
+                if(!response.body().toString().equals(""))
+                {
+                  nombres.setText(response.body().getNombres());
+                  apellidos.setText(response.body().getApellidos());
+                }else{
+                  nombres.setHint("Nombres");
+                  nombres.setText("");
+                  apellidos.setHint("Apellidos");
+                  apellidos.setText("");
+                }
               }
 
               @Override
@@ -139,7 +147,7 @@ public class MultasFormFragment extends Fragment {
     strDocumento = documento.getText().toString();
 
     if(TextUtils.isEmpty(strDocumento)){
-      placa.setError("Este Campo es Requerido");
+      documento.setError("Este Campo es Requerido");
       focusView = documento;
       cancel = true;
     }
@@ -149,7 +157,7 @@ public class MultasFormFragment extends Fragment {
     strNombres = nombres.getText().toString();
 
     if(TextUtils.isEmpty(strNombres)){
-      placa.setError("Este Campo es Requerido");
+      nombres.setError("Este Campo es Requerido");
       focusView = nombres;
       cancel = true;
     }
@@ -159,7 +167,7 @@ public class MultasFormFragment extends Fragment {
     strApellidos = apellidos.getText().toString();
 
     if(TextUtils.isEmpty(strApellidos)){
-      placa.setError("Este Campo es Requerido");
+      apellidos.setError("Este Campo es Requerido");
       focusView = apellidos;
       cancel = true;
     }
