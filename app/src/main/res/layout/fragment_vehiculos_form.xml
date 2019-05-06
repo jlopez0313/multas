@@ -40,11 +40,25 @@
         </android.support.design.widget.TextInputLayout>
       </LinearLayout>
 
-      <Button
-        android:id="@+id/btnPersonas"
+      <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Guardar" />
+        android:layout_height="match_parent">
+
+        <Button
+          android:id="@+id/btnRegresar"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="Regresar" />
+
+        <Button
+          android:id="@+id/btnVehiculos"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="Guardar" />
+      </LinearLayout>
+
 
     </LinearLayout>
   </ScrollView>

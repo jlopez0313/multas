@@ -25,16 +25,16 @@ public interface PersonasInterface
   Call<Personas> porDocumento(@Field("documento") int documento);
 
 
-  @PUT("personas/store")
+  @POST("personas/store")
   @FormUrlEncoded
   Call<Personas> store(@Field("documento") int documento,
                         @Field("nombres") String nombres,
                         @Field("apellidos") String apellidos
   );
 
-  @PATCH("personas/update")
+  @PUT("personas/update/{id}")
   @FormUrlEncoded
-  Call<Personas> update(@Field("id") int id,
+  Call<Personas> update(@Path("id") int id,
                         @Field("documento") int documento,
                         @Field("nombres") String nombres,
                         @Field("apellidos") String apellidos

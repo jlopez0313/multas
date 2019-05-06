@@ -36,7 +36,7 @@ public class VehiculosFormFragment extends Fragment {
 
   EditText placa;
   String strPlaca;
-  Button btn;
+  Button btn, btnBack;
   View rootView;
 
   @Override
@@ -45,7 +45,21 @@ public class VehiculosFormFragment extends Fragment {
     // Inflate the layout for this fragment
     rootView = inflater.inflate(R.layout.fragment_vehiculos_form, container, false);
 
-    btn = (Button) rootView.findViewById(R.id.btnPersonas);
+    btnBack = (Button) rootView.findViewById(R.id.btnRegresar);
+    btnBack.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        Fragment newFragment = new VehiculosFragment();
+        android.support.v4.app.FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+
+        transaction.replace(R.id.content_main, newFragment);
+        transaction.addToBackStack(null);
+
+        transaction.commit();
+      }
+    });
+
+    btn = (Button) rootView.findViewById(R.id.btnVehiculos);
     btn.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
@@ -85,7 +99,7 @@ public class VehiculosFormFragment extends Fragment {
   private void sendForm()
   {
     VehiculosInterface servicio = new Servicios().Servicios().create(VehiculosInterface.class);
-    final Call<Vehiculos> created = servicio.store(placa.getText().toString());
+    final Call<Vehiculos> created = servicio.store(placa.getText().toString().toUpperCase());
     created.enqueue(new Callback<Vehiculos>() {
       @Override
       public void onResponse(Call<Vehiculos> call, Response<Vehiculos> response) {

@@ -63,8 +63,6 @@ public class Multas
       "codigo = " + codigo  +
       "valor = " + valor  +
       "fecha = " + fecha  +
-      "Persona = " + persona.getNombres() + " " + persona.getApellidos() +
-      "Vehiculo = " + vehiculo.getPlaca() +
       "}";
   }
 }

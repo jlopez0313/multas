@@ -19,13 +19,13 @@ public interface VehiculosInterface
   @POST("vehiculos/show/{id}")
   Call<Vehiculos> show(@Path("id") int id);
 
-  @PUT("vehiculos/store")
+  @POST("vehiculos/store")
   @FormUrlEncoded
   Call<Vehiculos> store(@Field("placa") String placa);
 
-  @PATCH("vehiculos/update")
+  @PUT("vehiculos/update/{id}")
   @FormUrlEncoded
-  Call<Vehiculos> update(@Field("id") int id,
+  Call<Vehiculos> update(@Path("id") int id,
                          @Field("placa") String placa
   );
 

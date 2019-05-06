@@ -44,7 +44,7 @@ public class MultasFormFragment extends Fragment {
   String strDocumento, strNombres, strApellidos, strPlaca, strCodigo, strValor, strEstado;
   LinearLayout layoutPersonas;
   Spinner estados;
-  Button btn;
+  Button btn, btnBack;
   View rootView;
 
   @Override
@@ -94,14 +94,12 @@ public class MultasFormFragment extends Fragment {
               @Override
               public void onResponse(Call<Personas> call, Response<Personas> response) {
                 layoutPersonas.setVisibility(View.VISIBLE);
-                if(!response.body().toString().equals(""))
+                if(!(response.body() == null))
                 {
                   nombres.setText(response.body().getNombres());
                   apellidos.setText(response.body().getApellidos());
                 }else{
-                  nombres.setHint("Nombres");
                   nombres.setText("");
-                  apellidos.setHint("Apellidos");
                   apellidos.setText("");
                 }
               }
@@ -122,6 +120,20 @@ public class MultasFormFragment extends Fragment {
       }
     });
 
+
+    btnBack = (Button) rootView.findViewById(R.id.btnRegresar);
+    btnBack.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        Fragment newFragment = new MultasFragment();
+        android.support.v4.app.FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+
+        transaction.replace(R.id.content_main, newFragment);
+        transaction.addToBackStack(null);
+
+        transaction.commit();
+      }
+    });
 
     btn = (Button) rootView.findViewById(R.id.btnMultas);
     btn.setOnClickListener(new View.OnClickListener() {
@@ -216,16 +228,18 @@ public class MultasFormFragment extends Fragment {
     MultasInterface servicio = new Servicios().Servicios().create(MultasInterface.class);
     final Call<Multas> created = servicio.store(
         Integer.parseInt(valor.getText().toString()),
-        codigo.getText().toString(),
+        codigo.getText().toString().toUpperCase(),
         Integer.parseInt(documento.getText().toString()),
-        placa.getText().toString()
+        nombres.getText().toString().toUpperCase(),
+        apellidos.getText().toString().toUpperCase(),
+        placa.getText().toString().toUpperCase()
     );
 
     created.enqueue(new Callback<Multas>() {
       @Override
       public void onResponse(Call<Multas> call, Response<Multas> response) {
         rootView.findViewById(R.id.loader).setVisibility(View.GONE);
-        Toast.makeText(getActivity(), "Información Registrada Exitosamente", Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity(), "Información Registrada Exitosamente ", Toast.LENGTH_LONG).show();
       }
 
       @Override

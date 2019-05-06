@@ -10,6 +10,7 @@ import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface MultasInterface
 {
@@ -19,17 +20,19 @@ public interface MultasInterface
   @POST("multas/show/{id}")
   Call<Multas> getMulta(@Path("id") int id);
 
-  @PUT("multas/store")
+  @POST("multas/store")
   @FormUrlEncoded
   Call<Multas> store(@Field("valor") int valor,
                      @Field("codigo") String codigo,
                      @Field("documento") int documento,
+                     @Field("nombres") String nombres,
+                     @Field("apellidos") String apellidos,
                      @Field("placa") String placa
   );
 
-  @PATCH("multas/update")
+  @PUT("multas/update/{id}")
   @FormUrlEncoded
-  Call<Multas> update(@Field("id") int id,
+  Call<Multas> update(@Path("id") int id,
                       @Field("codigo") String codigo,
                       @Field("valor") String valor,
                       @Field("documento") int documento,

@@ -33,7 +33,7 @@ public class PersonasFormFragment extends Fragment {
 
   EditText documento, nombres, apellidos;
   String strNombres, strApellidos, strDocumento;
-  Button btn;
+  Button btn, btnBack;
   View rootView;
 
   @Override
@@ -41,6 +41,20 @@ public class PersonasFormFragment extends Fragment {
                            Bundle savedInstanceState) {
     // Inflate the layout for this fragment
     rootView = inflater.inflate(R.layout.fragment_personas_form, container, false);
+
+    btnBack = (Button) rootView.findViewById(R.id.btnRegresar);
+    btnBack.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        Fragment newFragment = new PersonasFragment();
+        android.support.v4.app.FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+
+        transaction.replace(R.id.content_main, newFragment);
+        transaction.addToBackStack(null);
+
+        transaction.commit();
+      }
+    });
 
     btn = (Button) rootView.findViewById(R.id.btnPersonas);
     btn.setOnClickListener(new View.OnClickListener() {
@@ -101,8 +115,8 @@ public class PersonasFormFragment extends Fragment {
   {
     PersonasInterface servicio = new Servicios().Servicios().create(PersonasInterface.class);
     final Call<Personas> created = servicio.store(Integer.parseInt(documento.getText().toString()),
-                                                  nombres.getText().toString(),
-                                                  apellidos.getText().toString());
+                                                  nombres.getText().toString().toUpperCase(),
+                                                  apellidos.getText().toString().toUpperCase() );
     created.enqueue(new Callback<Personas>() {
       @Override
       public void onResponse(Call<Personas> call, Response<Personas> response) {

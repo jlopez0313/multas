@@ -1,7 +1,10 @@
 package com.jonnathan.multas.Clases;
 
 import android.app.AlertDialog;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.DialogInterface;
+import android.support.v4.app.FragmentActivity;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jonnathan.multas.PersonasFormFragment;
 import com.jonnathan.multas.R;
 import com.squareup.picasso.Picasso;
 
@@ -67,18 +71,22 @@ public class PersonasAdapter extends BaseAdapter
     edit.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-
+        editPersona(i, listaPersonas.get(i).getId());
       }
     });
 
     trash.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        trashPersona(i, listaPersonas.get(i).getId());
+        
       }
     });
 
     return vista;
+  }
+
+  private void editPersona(int i, int id) {
+
   }
 
   private void trashPersona(final int i, final int id) {
