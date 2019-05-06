@@ -78,7 +78,7 @@ public class PersonasAdapter extends BaseAdapter
     trash.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        
+        trashPersona(i, listaPersonas.get(i).getId());
       }
     });
 
